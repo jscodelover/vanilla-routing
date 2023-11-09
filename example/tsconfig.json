@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"lib": ["es2021", "dom", "dom.iterable"],
+		"module": "ES6",
+		"strict": true,
+		"target": "ES2015",
+		// "types": ["/src/types.ts"],
+		"noEmit": true
+	}
+}

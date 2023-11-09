@@ -1,0 +1,43 @@
+{
+  "name": "vanilla-router-dom",
+  "license": "MIT",
+  "version": "0.0.1",
+  "author": "manisha4918@gmail.com",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "start": "npm run lint && npm run dev-tsc",
+    "build": "npm run lint && tsup",
+    "dev-tsc": "tsup --watch",
+    "lint": "eslint ./src",
+    "format": "prettier --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "express": "^4.18.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npm run format",
+      "npm run lint",
+      "git add"
+    ]
+  }
+}

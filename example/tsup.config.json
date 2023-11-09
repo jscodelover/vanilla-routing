@@ -1,0 +1,8 @@
+{
+	"entry": ["/"],
+	"output": ["/example/app"],
+	"splitting": "false",
+	"format": ["cjs"],
+	"minifyWhitespace": true,
+	"tsconfig": "./tsconfig.json"
+}
