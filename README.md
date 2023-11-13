@@ -220,6 +220,8 @@ For real-world examples on using the Vanilla Router DOM, please visit the [GitHu
 
 If you'd like to contribute to the Vanilla Router DOM or report any issues, please visit the [GitHub repository](https://github.com/jscodelover/vanilla-router-dom) for the library.
 
-## License and Credits
+## License
 
-The Vanilla Router DOM is released under the MIT License. It may include dependencies or resources from other open-source projects, for which appropriate credit is given.
+Released under the [MIT](https://raw.githubusercontent.com/jscodelover/vanilla-router-dom/main/LICENSE) license
+
+Copyright (c) 2023 Manisha Basra
