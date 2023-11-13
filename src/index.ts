@@ -171,7 +171,7 @@ class RouterManagement implements RouterManagement {
     const { nestedLevel, pathname } = routeData;
 
     const renderRouteEle = [
-      ...document.querySelectorAll('[data-route-ele="router-wrap"]'),
+      ...document.querySelectorAll('[data-vanilla-route-ele="router-wrap"]'),
     ];
 
     // number of the sub-route element which have the content
@@ -197,7 +197,7 @@ class RouterManagement implements RouterManagement {
 
     for (const [index, path] of searchPathArr.entries()) {
       const renderEleFragment = [
-        ...fragment.querySelectorAll('[data-route-ele="router-wrap"]'),
+        ...fragment.querySelectorAll('[data-vanilla-route-ele="router-wrap"]'),
       ];
       const routeFragmentEle =
         index === 0 ? fragment : renderEleFragment[index - 1];
@@ -252,8 +252,7 @@ class RouterManagement implements RouterManagement {
     return pathname;
   }
 
-  // route change
-  go(searchPathname: string, options?: PushHistory, replaceState = false) {
+  #push(searchPathname: string, options?: PushHistory, replaceState = false) {
     const routePath = this.#routePath(searchPathname);
     if (this.#isNotSameRoute(routePath)) {
       const { state = {}, addToHistory = true } = options ?? {};
@@ -272,7 +271,7 @@ class RouterManagement implements RouterManagement {
       });
 
       const routeRenderEle = [
-        ...document.querySelectorAll('[data-route-ele="router-wrap"]'),
+        ...document.querySelectorAll('[data-vanilla-route-ele="router-wrap"]'),
       ];
 
       // route by route access to the nested route
@@ -287,6 +286,11 @@ class RouterManagement implements RouterManagement {
       // on route change, page should start from the top
       window.scrollTo(0, 0);
     }
+  }
+
+  // route change
+  go(searchPathname: string, options?: PushHistory) {
+    this.#push(searchPathname, options);
   }
 
   dispose<T extends () => void>(cb: T) {
@@ -317,11 +321,10 @@ class RouterManagement implements RouterManagement {
     if (this.routeType === HashRouteType) {
       pathname = `/#${searchPathname}`;
     }
-    this.go(pathname, { state, addToHistory: false }, true);
+    this.#push(pathname, { state, addToHistory: false }, true);
   }
 
-  // route config
-  config(routeData: Routes[], basePath = '', nestedLevel = 0) {
+  #routeConfig(routeData: Routes[], basePath = '', nestedLevel = 0) {
     routeData.forEach(routeInfo => {
       const pathname = `${basePath}${routeInfo.pathname}`;
       const paramsKey = this.#splitPath(pathname.replaceAll(':', ''));
@@ -333,9 +336,14 @@ class RouterManagement implements RouterManagement {
         nestedLevel,
       };
       if (routeInfo.children) {
-        this.config(routeInfo.children, pathname, nestedLevel + 1);
+        this.#routeConfig(routeInfo.children, pathname, nestedLevel + 1);
       }
     });
+  }
+
+  // route config
+  config(routeData: Routes[], basePath = '') {
+    this.#routeConfig(routeData, basePath);
   }
 }
 
