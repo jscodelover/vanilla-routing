@@ -1,11 +1,17 @@
 {
   "name": "vanilla-router-dom",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "manisha4918@gmail.com",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "keywords": [
+    "routing",
+    "spa",
+    "vanilla routing",
+    "client side routing"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -21,6 +27,7 @@
     "format": "prettier --ignore-path .gitignore"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "eslint": "^8.53.0",
@@ -36,8 +43,7 @@
   "lint-staged": {
     "*.{js,ts}": [
       "npm run format",
-      "npm run lint",
-      "git add"
+      "npm run lint"
     ]
   }
 }

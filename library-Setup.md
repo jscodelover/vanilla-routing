@@ -1,4 +1,0 @@
-- Add name to the package
-- Add license to the package
-- Add main, module, types to the package
-- changeset handle the package version

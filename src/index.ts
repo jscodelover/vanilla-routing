@@ -7,7 +7,12 @@ import {
   RouteWithLocation,
   RouteType,
 } from './types';
-import { BrowserRouteType, HashRouteType } from './constant';
+import {
+  BrowserRouteType,
+  DefaultNestedLevel,
+  HashRouteType,
+  _404RRoute,
+} from './constant';
 
 class RouterManagement implements RouterManagement {
   #location: RouteLocation = {
@@ -16,7 +21,9 @@ class RouterManagement implements RouterManagement {
     search: {},
     hash: '',
   };
-  #routes: Record<string, Route> = {};
+  #routes: Record<string, Route> = {
+    '*': _404RRoute,
+  };
   #disposeCb: Record<string, () => void> = {};
   routeType: RouteType = BrowserRouteType;
 
@@ -55,7 +62,7 @@ class RouterManagement implements RouterManagement {
       return queryStringArr.reduce((obj, queryParams) => {
         const [key, value] = queryParams.split('=');
 
-        return { ...obj, [key]: value };
+        return { ...obj, [key as string]: value };
       }, {});
     }
     return {};
@@ -67,7 +74,7 @@ class RouterManagement implements RouterManagement {
   }
 
   #getParams({ pathname, searchedPathname }: GetParams) {
-    const routeInfo = this.#routes[pathname];
+    const routeInfo = this.#routes[pathname]!;
 
     const paramsValue = this.#splitPath(searchedPathname);
     const paramsKey = Object.keys(routeInfo.params);
@@ -121,29 +128,29 @@ class RouterManagement implements RouterManagement {
   }
 
   #getRoute(searchedPathname: string): RouteWithLocation {
-    let data = { ...this.#routes['*'], pathname: '*' };
-
     const searchedPath = this.#getPath(searchedPathname);
 
-    for (const pathname in this.#routes) {
-      const routeInfo = this.#routes[pathname];
-      const path = this.#getPath(pathname);
+    let routeData = this.#routes['*']!;
+    let pathInfo = '*';
 
-      console.log({ searchedPathname, pathname, path, searchedPath });
+    for (const pathname in this.#routes) {
+      const routeInfo = this.#routes[pathname]!;
+      const path = this.#getPath(pathname);
 
       if (!this.#checkEqualPath({ searchedPathname, pathname })) {
         continue;
       }
 
+      pathInfo = pathname;
+
       if (pathname === searchedPathname) {
-        data = { ...routeInfo, pathname };
+        routeData = routeInfo;
         break;
       }
 
       if (!searchedPath || path === searchedPath) {
-        data = {
+        routeData = {
           ...routeInfo,
-          pathname,
           params: this.#getParams({
             pathname,
             searchedPathname: this.#removeQueryParamsAndHash(searchedPathname),
@@ -154,7 +161,8 @@ class RouterManagement implements RouterManagement {
     }
 
     return {
-      ...data,
+      ...routeData,
+      pathname: pathInfo,
       search: this.#getQueryString(searchedPathname),
       hash: this.#getHash(searchedPathname),
     };
@@ -163,8 +171,10 @@ class RouterManagement implements RouterManagement {
   #directRoute(routeRenderEle: Element[], routeData: RouteWithLocation) {
     const { nestedLevel, element } = routeData;
     const routeEle = routeRenderEle[nestedLevel];
-    routeEle.innerHTML = '';
-    routeEle.appendChild(element());
+    if (routeEle) {
+      routeEle.innerHTML = '';
+      routeEle.appendChild(element());
+    }
   }
 
   #directNestedRoute(searchPathname: string, routeData: RouteWithLocation) {
@@ -205,17 +215,18 @@ class RouterManagement implements RouterManagement {
       const routeInfo = this.#getRoute(`${nextPath}/${path}`);
       nextPath += `/${path}`;
       if (routeInfo.pathname === '*') {
-        routeFragmentEle.appendChild(this.#routes['*'].element());
+        routeFragmentEle?.appendChild(this.#routes['*']!.element());
         break;
       } else {
-        routeFragmentEle.appendChild(routeInfo.element());
+        routeFragmentEle?.appendChild(routeInfo.element());
       }
     }
 
     const routeEle = renderRouteEle[routeEleWithData]; //  route element in which subRoute element will be rendered
-
-    routeEle.innerHTML = '';
-    routeEle.appendChild(fragment);
+    if (routeEle) {
+      routeEle.innerHTML = '';
+      routeEle.appendChild(fragment);
+    }
   }
 
   #updateHistory({
@@ -324,7 +335,11 @@ class RouterManagement implements RouterManagement {
     this.#push(pathname, { state, addToHistory: false }, true);
   }
 
-  #routeConfig(routeData: Routes[], basePath = '', nestedLevel = 0) {
+  #routeConfig(
+    routeData: Routes[],
+    basePath = '',
+    nestedLevel = DefaultNestedLevel
+  ) {
     routeData.forEach(routeInfo => {
       const pathname = `${basePath}${routeInfo.pathname}`;
       const paramsKey = this.#splitPath(pathname.replaceAll(':', ''));
