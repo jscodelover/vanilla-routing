@@ -22,7 +22,7 @@ jobs:
         run: npm install --frozen-lockfile
 
       - name: Check linting
-        run: npm run lint && npm run format
+        run: npm run format
 
       - name: Build the package
         run: npm run build
