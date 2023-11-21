@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "strict": true,
+    "target": "ES2015",
+    "moduleResolution": "Bundler",
+    "noEmit": true
+  },
+  "include": ["./src"],
+  "exclude": ["./server.js"]
+}

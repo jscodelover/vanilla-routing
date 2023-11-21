@@ -1,17 +1,22 @@
 {
-  "name": "vanilla-router-dom",
+  "name": "vanilla-routing",
   "license": "MIT",
   "version": "1.0.0",
-  "author": "manisha4918@gmail.com",
+  "author": "Manisha Basra (jscodelover)",
+  "description": "Modern Vanilla Javascript routing library.",
   "keywords": [
+    "route",
     "routing",
     "spa",
     "vanilla routing",
-    "client side routing"
+    "client side routing",
+    "browser router",
+    "hash router",
+    "router"
   ],
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -21,10 +26,11 @@
   },
   "scripts": {
     "start": "npm run lint && npm run dev-tsc",
-    "build": "npm run lint && tsup",
+    "build": "tsup --dts-resolve",
     "dev-tsc": "tsup --watch",
     "lint": "eslint ./src",
-    "format": "prettier --ignore-path .gitignore"
+    "format": "prettier --ignore-path .gitignore",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
@@ -33,7 +39,6 @@
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
-    "express": "^4.18.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
@@ -45,5 +50,10 @@
       "npm run format",
       "npm run lint"
     ]
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jscodelover/vanilla-routing"
+  },
+  "homepage": "https://github.com/jscodelover/vanilla-routing#readme"
 }

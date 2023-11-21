@@ -1,0 +1,8 @@
+{
+  "entry": ["./src"],
+  "format": ["iife"],
+  "minifyWhitespace": true,
+  "minify": true,
+  "tsconfig": "./tsconfig.json",
+  "clean": true
+}

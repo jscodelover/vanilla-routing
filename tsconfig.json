@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-    "lib": ["es2021", "dom", "dom.iterable"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "ES6",
-    "outDir": "dist",
     "strict": true,
+    "noEmit": true,
     "target": "ES2015",
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "noEmit": true
-    // "declaration": true // By providing the declaration files, users can import your library and get type hints in their IDEs, even if they are not using
+    "declaration": true // By providing the declaration files, users can import your library and get type hints in their IDEs, even if they are not using
   },
-  "include": ["./src"],
-  "exclude": ["./example", "./example2"]
+  "include": ["./src"]
 }
