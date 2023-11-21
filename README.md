@@ -4,7 +4,7 @@ The Vanilla Routing stands out as a lightweight and versatile routing solution d
 
 Vanilla Router for client side routing, inspired by React Router.
 
-#### [Example](https://github.com/jscodelover/vanilla-routing/tree/main/example)
+#### [Example](https://github.com/jscodelover/vanilla-routing/tree/main/examples/withPackage)
 
 ## Installation
 
