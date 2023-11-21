@@ -29,7 +29,7 @@
     "build": "tsup --dts-resolve",
     "dev-tsc": "tsup --watch",
     "lint": "eslint ./src",
-    "format": "prettier --ignore-path .gitignore",
+    "format": "prettier ./src -c -w --ignore-path .gitignore",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
