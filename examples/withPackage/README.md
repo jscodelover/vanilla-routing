@@ -26,10 +26,6 @@ node server.js
 
 ---
 
----
-
----
-
 This example supports both the BrowserRouter and the HashRouter. You can try changing the routing type in the `main.ts` file.
 
 If you want to try `HashRouter`. Replace the `BrowserRouter` with the `HashRouter`.
