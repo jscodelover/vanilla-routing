@@ -376,10 +376,11 @@ class RouterSetup extends RouterManagement {
 
   // take the user on the previous route on using the the browser back functionality
   #backListener() {
-    window.addEventListener('popstate', event => {
-      const { pathname } = event.state || {};
+    window.addEventListener('popstate', (event: PopStateEvent) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const { pathname = '' } = event.state || {};
       if (pathname) {
-        this.go(pathname, { state: {}, addToHistory: false });
+        this.go(pathname as string, { state: {}, addToHistory: false });
       }
     });
   }
