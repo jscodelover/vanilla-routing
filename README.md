@@ -211,10 +211,10 @@ The `config` method is used to configure the routes for the application. It take
   - `routeData`: An array of `Routes` representing the routes to be configured.
     ```javascript
     Routes = {
-      pathname: '/',  /* route path */
-      element: () =>  {}, /* element to be rendered */
-      children: [] /* (Optional) nested routes
-    }
+      pathname: '/' /* route path */,
+      element: () => {} /* element to be rendered */,
+      children: [] /* (Optional) nested routes */,
+    };
     ```
   - `basePath` (optional): A string representing the base path for the routes.
 
@@ -227,7 +227,7 @@ The `dispose` method is used to register a callback function to be executed when
 
 ## Advanced Topics
 
-The Vanilla Routing supports advanced features such as route disposal, route setup validation, and event listeners for route navigation.
+The Vanilla Routing supports advanced features such as route disposal, route setup, and event listeners for route navigation.
 
 ## Contributing and Support
 
