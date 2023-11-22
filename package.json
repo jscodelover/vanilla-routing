@@ -54,7 +54,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jscodelover/vanilla-routing"
+    "url": "git+https://github.com/jscodelover/vanilla-routing.git"
   },
   "homepage": "https://github.com/jscodelover/vanilla-routing#readme"
 }
