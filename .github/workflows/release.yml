@@ -5,7 +5,13 @@ on:
     branches:
       - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }} # make sure 2 publish workflows are not happening on the same time 
+concurrency: ${{ github.workflow }}-${{ github.ref }} # make sure 2 publish workflows are not happening on the same time
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none
 
 jobs:
   release:
@@ -20,16 +26,26 @@ jobs:
         with:
           node-version: 18.x
 
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Install Dependencies
         run: npm install --frozen-lockfile
+
+      - name: Check linting
+        run: npm run lint && npm run format
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: npm run build
+          publish: npm run publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
