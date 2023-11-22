@@ -1,7 +1,7 @@
 {
   "name": "vanilla-routing",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "author": "Manisha Basra (jscodelover)",
   "description": "Modern Vanilla Javascript routing library.",
   "keywords": [
@@ -27,7 +27,7 @@
   "scripts": {
     "start": "npm run lint && npm run dev-tsc",
     "build": "tsup",
-    "publish": "npm run build && npx changesets publish",
+    "publish": "npm run build && changeset publish",
     "dev-tsc": "tsup --watch",
     "lint": "eslint ./src",
     "format": "prettier ./src -c -w --ignore-path .gitignore",
