@@ -7,12 +7,6 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }} # make sure 2 publish workflows are not happening on the same time
 
-permissions:
-  contents: write
-  pull-requests: write
-  issues: read
-  packages: none
-
 jobs:
   release:
     name: Release
