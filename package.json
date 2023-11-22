@@ -27,7 +27,7 @@
   "scripts": {
     "start": "npm run lint && npm run dev-tsc",
     "build": "tsup",
-    "publish": "npm run build && changesets publish",
+    "publish": "npm run build && npx changesets publish",
     "dev-tsc": "tsup --watch",
     "lint": "eslint ./src",
     "format": "prettier ./src -c -w --ignore-path .gitignore",
