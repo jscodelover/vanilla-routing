@@ -1,5 +1,5 @@
-import { Router, routeLocation } from 'final-vr-manisha-2';
-import type { Routes } from 'final-vr-manisha-2';
+import { Router, routeLocation } from 'vanilla-routing';
+import type { Routes } from 'vanilla-routing';
 
 const learnJsRoute: Routes[] = [
   {

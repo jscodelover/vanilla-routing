@@ -12,10 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "tsup": "^8.0.1",
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "date-fns": "^2.30.0",
-    "final-vr-manisha-2": "^1.0.0"
+    "vanilla-routing": "^0.0.2"
   }
 }

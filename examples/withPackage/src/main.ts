@@ -1,4 +1,4 @@
-import { BrowserRoute } from 'final-vr-manisha-2';
+import { BrowserRoute } from 'vanilla-routing';
 import { routeConfig } from './routeConfig';
 
 document.addEventListener('DOMContentLoaded', () => {
