@@ -24,10 +24,13 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "npm run lint && npm run dev-tsc",
     "build": "tsup",
-    "release": "npm run build && npm publish --access public",
+    "release": "npm run build && npm publish",
     "dev-tsc": "tsup --watch",
     "lint": "eslint ./src",
     "format": "prettier ./src -c -w --ignore-path .gitignore",
