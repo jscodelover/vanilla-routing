@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 
-// Serve static files from the "example" directory
+// Serve static files from the "examples/withPackage" directory
 app.use('/', express.static(path.join('src')));
 app.use('*/dist', express.static(path.join('dist')));
 

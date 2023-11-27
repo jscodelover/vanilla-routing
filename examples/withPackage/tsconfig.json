@@ -4,7 +4,7 @@
     "module": "esnext",
     "strict": true,
     "target": "ES2015",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "Node",
     "noEmit": true
   },
   "include": ["./src"],
