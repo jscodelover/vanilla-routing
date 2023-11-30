@@ -18,8 +18,8 @@ jobs:
       - name: Install Dependencies
         run: npm install --frozen-lockfile
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Inside the example
+        run: cd example && npm install --frozen-lockfile
 
       - name: Run Playwright tests
         run: npm run test:ci
