@@ -5,12 +5,10 @@
   "main": "server.cjs",
   "type": "module",
   "scripts": {
-    "path:browser": "cd browser-route",
-    "path:hash": "cd hash-route",
-    "tsup:browser": "npm run path:browser && npx tsup --entry.main ./main.ts --outDir ./dist --watch",
-    "tsup:hash": "npm run path:hash && npx tsup --entry.main ./main.ts --outDir ./dist --watch",
-    "start:browser": "npm run path:browser && node server.cjs & npm run tsup:browser ",
-    "start:hash": "npm run path:hash && npx serve -p 3001 & npm run tsup:hash",
+    "tsup:browser": "npx tsup --entry.main ./browser-route/main.ts --outDir ./browser-route/dist --watch",
+    "tsup:hash": "npx tsup --entry.main ./hash-route/main.ts --outDir ./hash-route/dist --watch",
+    "start:browser": "node browser-route/server.cjs & npm run tsup:browser ",
+    "start:hash": "cd hash-route && npx serve -p 3001 & npm run tsup:hash",
     "tsc": "tsc"
   },
   "keywords": [],

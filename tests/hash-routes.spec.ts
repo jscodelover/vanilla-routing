@@ -1,9 +1,9 @@
 import { test, expect, type Page } from '@playwright/test';
 
-const baseURl = 'http://localhost:3001';
+const baseHashRouteURL = 'http://localhost:3001';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(baseURl);
+  await page.goto(baseHashRouteURL);
 });
 
 async function gotoAboutPage(page: Page) {
@@ -12,14 +12,14 @@ async function gotoAboutPage(page: Page) {
 
 test.describe('HashRoute', () => {
   test('Initial page route', async ({ page }) => {
-    await expect(page).toHaveURL(`${baseURl}/#/`);
+    await expect(page).toHaveURL(`${baseHashRouteURL}/#/`);
     const locator = page.locator('h2');
     await expect(locator).toHaveText('HOME PAGE');
   });
 
   test('Anchor link', async ({ page }) => {
     await gotoAboutPage(page);
-    await expect(page).toHaveURL(`${baseURl}/#/about`);
+    await expect(page).toHaveURL(`${baseHashRouteURL}/#/about`);
   });
 
   test('Check the go method', async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe('HashRoute', () => {
       .filter({ hasText: /About me/i })
       .click();
     await page.getByRole('button').filter({ hasText: 'Go back' }).click();
-    await expect(page).toHaveURL(`${baseURl}/#/`);
+    await expect(page).toHaveURL(`${baseHashRouteURL}/#/`);
   });
 
   test('nested route using link with params', async ({ page }) => {
@@ -47,20 +47,20 @@ test.describe('HashRoute', () => {
   });
 
   test('search for the nested route', async ({ page }) => {
-    await page.goto(`${baseURl}/#/learn/js`);
+    await page.goto(`${baseHashRouteURL}/#/learn/js`);
     await expect(page).toHaveURL(/#\/learn\/js/);
   });
 
   test('Replace path', async ({ page }) => {
     // JS -> Library Publishing -> (Replace With) CSS -> (Browser BACK) -> JS
-    await page.goto(`${baseURl}/#/learn/js`);
+    await page.goto(`${baseHashRouteURL}/#/learn/js`);
     await expect(page).toHaveURL(/#\/learn\/js/);
     await page.getByRole('link', { name: 'Library publishing' }).click();
     await expect(page).toHaveURL(/#\/learn\/js\/library-publishing/);
     await expect(page.locator('h4')).toHaveText(
       /Learning JS library publishing/
     );
-    await page.getByRole('button').click();
+    await page.getByRole('button', { name: /Replace with css page/i }).click();
     await expect(page).toHaveURL(/#\/learn\/css/);
     await page.goBack();
     await page.goBack();
@@ -84,13 +84,13 @@ test.describe('HashRoute', () => {
   });
 
   test('404 page', async ({ page }) => {
-    await page.goto(`${baseURl}/#/path-doesnot-exist`);
+    await page.goto(`${baseHashRouteURL}/#/path-doesnot-exist`);
     expect(page.getByText(/Page not Found/i)).toBeTruthy();
   });
 
   test('search for nested 404 page', async ({ page }) => {
     await page.getByRole('link', { name: /Library Creation/i }).click();
-    await page.goto(`${baseURl}/#/learn/js/sdfds`);
+    await page.goto(`${baseHashRouteURL}/#/learn/js/sdfds`);
     await expect(page.getByText(/Learning JS/i)).toBeVisible();
     await expect(page.getByText(/Page not Found/i)).toBeVisible();
   });

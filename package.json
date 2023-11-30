@@ -36,6 +36,9 @@
     "format": "prettier ./src -c -w --ignore-path .gitignore",
     "test": "npx playwright test",
     "test:chrome": "npx playwright test --project=chromium",
+    "test:br:ci": "cd example && npm run start:browser & wait-on tcp:3000 -d 1000 && npx playwright test tests/browser* --project=chromium",
+    "test:hr:ci": "cd example && npm run start:hash & wait-on tcp:3001 -d 1000 && npx playwright test tests/hash* --project=chromium",
+    "test:ci": "npm run test:br:ci & npm run test:hr:ci",
     "test:ui": "npx playwright test --ui",
     "test:report": "npx playwright show-report",
     "test-vi": "vitest",
@@ -55,7 +58,8 @@
     "prettier": "^3.0.3",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "wait-on": "^7.2.0"
   },
   "lint-staged": {
     "*.{js,ts}": [
