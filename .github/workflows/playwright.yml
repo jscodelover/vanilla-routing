@@ -5,6 +5,9 @@ on:
     branches:
       - '**'
 
+env:
+  PACKAGE_NAME: vanilla-routing
+
 jobs:
   test:
     timeout-minutes: 60
@@ -16,10 +19,10 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install --frozen-lockfile
+        run: npm install --frozen-lockfile && npm link
 
       - name: Inside the example
-        run: cd example && npm install --frozen-lockfile && cd ..
+        run: cd example && npm install --frozen-lockfile && npm link $DAY_OF_WEEK && cd ..
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
