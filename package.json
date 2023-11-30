@@ -37,7 +37,7 @@
     "test": "npx playwright test",
     "test:chrome": "npx playwright test --project=chromium",
     "start:example": "cd example && npm run start:browser & cd example && npm run start:hash",
-    "test:ci": "start:example & wait-on tcp:3000 -d 1000 & wait-on tcp:3001 -d 1000 && npx playwright test",
+    "test:ci": "npm run start:example & wait-on tcp:3000 -d 1000 & wait-on tcp:3001 -d 1000 && npx playwright test",
     "test:ui": "npx playwright test --ui",
     "test:report": "npx playwright show-report",
     "test-vi": "vitest",
