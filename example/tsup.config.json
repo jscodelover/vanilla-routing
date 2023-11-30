@@ -1,5 +1,4 @@
 {
-  "entry": ["./src"],
   "format": ["iife"],
   "minifyWhitespace": true,
   "minify": true,

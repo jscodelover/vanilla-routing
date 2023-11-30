@@ -9,3 +9,6 @@ export const _404RRoute = {
   isSubRoute: false,
   nestedLevel: DefaultNestedLevel,
 };
+export const DefaultRoute = {
+  '*': _404RRoute,
+};

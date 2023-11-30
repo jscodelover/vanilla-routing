@@ -1,4 +1,4 @@
-name: Release
+name: Stage
 
 on:
   push:
@@ -26,3 +26,6 @@ jobs:
 
       - name: Build the package
         run: npm run build
+
+      - name: Unit Testing
+        run: npm run test-vi:prod

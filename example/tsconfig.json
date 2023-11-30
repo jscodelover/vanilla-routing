@@ -7,6 +7,6 @@
     "moduleResolution": "Node",
     "noEmit": true
   },
-  "include": ["./src"],
-  "exclude": ["./server.js"]
+  "include": ["./common", "./browser-route", "./hash-route"],
+  "exclude": ["./browser-route/server.cjs"]
 }

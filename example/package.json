@@ -1,0 +1,27 @@
+{
+  "name": "vanilla-routing-example",
+  "version": "1.0.0",
+  "description": "This example is built using TypeScript and [tsup](https://tsup.egoist.dev/) for bundling it into JavaScript.",
+  "main": "server.cjs",
+  "type": "module",
+  "scripts": {
+    "path:browser": "cd browser-route",
+    "path:hash": "cd hash-route",
+    "tsup:browser": "npm run path:browser && npx tsup --entry.main ./main.ts --outDir ./dist --watch",
+    "tsup:hash": "npm run path:hash && npx tsup --entry.main ./main.ts --outDir ./dist --watch",
+    "start:browser": "npm run path:browser && node server.cjs & npm run tsup:browser ",
+    "start:hash": "npm run path:hash && npx serve -p 3001 & npm run tsup:hash",
+    "tsc": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "4.18.2",
+    "tsup": "^8.0.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "vanilla-routing": "^0.0.2"
+  }
+}

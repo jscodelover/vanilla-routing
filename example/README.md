@@ -1,13 +1,15 @@
-# Example of vanilla-routing
+# vanilla-routing example
 
 This example is built using TypeScript and [tsup](https://tsup.egoist.dev/) for bundling it into JavaScript.
 
 ## Getting Started
 
+### With BrowserRouter example
+
 To start the dev server, it will bundle the code and run it on http://localhost:3000
 
 ```bash
-npm start
+npm run start:browser
 ```
 
 What this command does:
@@ -24,8 +26,18 @@ And run the following command, to start the server
 node server.js
 ```
 
----
+### With HashRouter example
 
-This example supports both the BrowserRouter and the HashRouter. You can try changing the routing type in the `main.ts` file.
+To start the dev server, it will bundle the code and run it on http://localhost:3001
 
-If you want to try `HashRouter`. Replace the `BrowserRouter` with the `HashRouter`.
+```bash
+npm run start:hash
+```
+
+What this command does:
+
+It run the following command to bundle the TypeScript code into JavaScript,
+
+```bash
+npx tsup main.ts --watch
+```
