@@ -21,5 +21,8 @@ jobs:
       - name: Inside the example
         run: cd example && npm install --frozen-lockfile && cd ..
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         run: npm run test:ci
