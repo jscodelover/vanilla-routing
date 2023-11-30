@@ -22,7 +22,7 @@ jobs:
         run: npm install --frozen-lockfile && npm link
 
       - name: Inside the example
-        run: cd example && npm install --frozen-lockfile && npm link $DAY_OF_WEEK && cd ..
+        run: cd example && npm install --frozen-lockfile && npm link $PACKAGE_NAME && cd ..
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
