@@ -1,0 +1,9 @@
+{
+  "entry": ["./src/app/hash-route/main.ts"],
+  "outDir": "./src/app/hash-route/dist",
+  "format": ["iife"],
+  "minifyWhitespace": true,
+  "minify": true,
+  "tsconfig": "./tsconfig.json",
+  "clean": true
+}

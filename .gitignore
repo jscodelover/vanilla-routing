@@ -1,3 +1,8 @@
 /dist
 node_modules
-/examples/withPackage/dist
+/example/*/dist
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/src/app/*/dist

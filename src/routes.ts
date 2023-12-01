@@ -11,7 +11,7 @@ import {
   BrowserRouteType,
   DefaultNestedLevel,
   HashRouteType,
-  _404RRoute,
+  DefaultRoute,
 } from './constant';
 
 class RouterManagement implements RouterManagement {
@@ -21,9 +21,7 @@ class RouterManagement implements RouterManagement {
     search: {},
     hash: '',
   };
-  #routes: Record<string, Route> = {
-    '*': _404RRoute,
-  };
+  #routes: Record<string, Route> = DefaultRoute;
   #disposeCb: Record<string, () => void> = {};
   routeType: RouteType = BrowserRouteType;
 
@@ -102,7 +100,8 @@ class RouterManagement implements RouterManagement {
     searchedPathname: string;
     pathname: string;
   }) {
-    const searchPathnameArr = searchedPathname.split('/');
+    const searchPathnameArr =
+      this.#removeQueryParamsAndHash(searchedPathname).split('/');
     const pathnameArr = pathname.split('/');
     if (searchPathnameArr.length === pathnameArr.length) {
       return pathnameArr.every(
@@ -142,7 +141,6 @@ class RouterManagement implements RouterManagement {
       }
 
       pathInfo = pathname;
-
       if (pathname === searchedPathname) {
         routeData = routeInfo;
         break;
@@ -185,7 +183,7 @@ class RouterManagement implements RouterManagement {
     ];
 
     // number of the sub-route element which have the content
-    const routeEleWithData = renderRouteEle.length - 1;
+    const routeElementsLen = renderRouteEle.length - 1;
 
     const cleanPath = this.#removeQueryParamsAndHash(searchPathname).split('/');
 
@@ -196,12 +194,12 @@ class RouterManagement implements RouterManagement {
         : cleanPath.slice(1, nestedLevel + 2);
 
     // search for the path whose router element doesn't exist in the DOM
-    const searchPathArr = pathArr.splice(routeEleWithData);
+    const searchPathArr = pathArr.splice(routeElementsLen);
 
     // route for which we have to render its route element
     let nextPath =
-      routeEleWithData > 0
-        ? `/${pathArr.splice(0, routeEleWithData).join('/')}`
+      routeElementsLen > 0
+        ? `/${pathArr.splice(0, routeElementsLen).join('/')}`
         : '';
     const fragment = document.createDocumentFragment();
 
@@ -222,7 +220,7 @@ class RouterManagement implements RouterManagement {
       }
     }
 
-    const routeEle = renderRouteEle[routeEleWithData]; //  route element in which subRoute element will be rendered
+    const routeEle = renderRouteEle[routeElementsLen]; //  route element in which subRoute element will be rendered
     if (routeEle) {
       routeEle.innerHTML = '';
       routeEle.appendChild(fragment);
@@ -285,11 +283,11 @@ class RouterManagement implements RouterManagement {
         ...document.querySelectorAll('[data-vanilla-route-ele="router-wrap"]'),
       ];
 
-      // route by route access to the nested route
+      // direct accessing the route
       if (routeRenderEle.length - 1 >= nestedLevel && pathname !== '*') {
         this.#directRoute(routeRenderEle, routeData);
       }
-      // direct accessing the nested route
+      // route by route access to the nested route
       else {
         this.#directNestedRoute(routePath, routeData);
       }
@@ -301,6 +299,10 @@ class RouterManagement implements RouterManagement {
 
   // route change
   go(searchPathname: string, options?: PushHistory) {
+    if (this.routeType === HashRouteType && !searchPathname.startsWith('/#')) {
+      searchPathname = `/#` + searchPathname;
+    }
+
     this.#push(searchPathname, options);
   }
 
@@ -435,7 +437,7 @@ class RouterSetup extends RouterManagement {
     this.#init(HashRouteType, routeData);
     let pathname = href.slice(origin.length);
     this.#appendHash();
-    if (pathname.slice(0, 2) !== '/#') {
+    if (!pathname.startsWith('/#')) {
       pathname = `/#${pathname}`;
       window.location.href = `${origin}${pathname}`;
     }

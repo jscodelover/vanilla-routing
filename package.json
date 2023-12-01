@@ -1,7 +1,7 @@
 {
   "name": "vanilla-routing",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Manisha Basra (jscodelover)",
   "description": "Modern Vanilla Javascript routing library.",
   "keywords": [
@@ -30,23 +30,44 @@
   "scripts": {
     "start": "npm run lint && npm run dev-tsc",
     "build": "tsup",
-    "release": "npm run build && npm publish",
     "dev-tsc": "tsup --watch",
+    "release": "npm run build && npm publish",
     "lint": "eslint ./src",
     "format": "prettier ./src -c -w --ignore-path .gitignore",
-    "prepublishOnly": "npm run build"
+    "____": "APP____",
+    "tsup:browser": "tsup --config ./src/app/browser-route/tsup.config.json --watch",
+    "tsup:hash": "tsup --config ./src/app/hash-route/tsup.config.json --watch",
+    "start:browser": "cd src/app/browser-route && node server.cjs & npm run tsup:browser ",
+    "start:hash": "cd src/app/hash-route && npx serve -p 3001 & npm run tsup:hash",
+    "start:app": "npm run start:browser & npm run start:hash",
+    "_____": "TEST____",
+    "test": "npx playwright test",
+    "test:chrome": "npx playwright test --project=chromium",
+    "test:br:ci": "npm run start:browser & wait-on tcp:3000 -d 1000 && npx playwright test tests/browser* --project=chromium",
+    "test:hr:ci": "npm run start:hash & wait-on tcp:3001 -d 1000 && npx playwright test tests/hash* --project=chromium",
+    "test:ci": "npm run start:browser &wait-on tcp:3000 -d 1000 && npm run start:hash & wait-on tcp:3001 -d 1000 && npm run test:chrome",
+    "test:ui": "npx playwright test --ui",
+    "test:report": "npx playwright show-report",
+    "test-vi": "vitest",
+    "test-vi:prod": "vitest run"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.10.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "express": "^4.18.2",
     "husky": "^8.0.3",
+    "jsdom": "^23.0.0",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
     "tsup": "^7.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6",
+    "wait-on": "^7.2.0"
   },
   "lint-staged": {
     "*.{js,ts}": [

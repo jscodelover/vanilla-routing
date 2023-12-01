@@ -1,15 +1,23 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "ES6",
+    "target": "ES2015",
+    "module": "esnext",
     "strict": true,
     "noEmit": true,
-    "target": "ES2015",
     "skipLibCheck": true,
     "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "declaration": true // By providing the declaration files, users can import your library and get type hints in their IDEs, even if they are not using
   },
-  "include": ["./src"]
+  "include": [
+    "./src",
+    "./tsup.config.ts",
+    "./tests",
+    "./playwright.config.ts",
+    "./vitest.config.ts"
+  ],
+  "exclude": ["./src/test", "./src/app/browser-route/server.cjs"]
 }

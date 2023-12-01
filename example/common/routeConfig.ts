@@ -5,7 +5,6 @@ const learnJsRoute: Routes[] = [
   {
     pathname: '/library-creation',
     element: () => {
-      console.log('/library-creation', routeLocation());
       const ele = document.createElement('h4');
       ele.innerText = 'Learning JS library creation';
       return ele;
@@ -14,9 +13,14 @@ const learnJsRoute: Routes[] = [
   {
     pathname: '/library-publishing',
     element: () => {
-      console.log('/library-publishing', routeLocation());
       const ele = document.createElement('h4');
       ele.innerText = 'Learning JS library publishing';
+      const btn = document.createElement('button');
+      btn.innerText = 'Refresh';
+      btn.onclick = () => {
+        Router.refresh();
+      };
+      ele.appendChild(btn);
       return ele;
     },
   },
@@ -26,7 +30,6 @@ const learnRoutes: Routes[] = [
   {
     pathname: '/js',
     element: () => {
-      console.log('/js', routeLocation());
       const fragment = document.createDocumentFragment();
       const ele = document.createElement('h3');
       ele.innerText = 'Learning JS';
@@ -41,7 +44,6 @@ const learnRoutes: Routes[] = [
   {
     pathname: '/css',
     element: () => {
-      console.log('/css', routeLocation());
       const ele = document.createElement('h3');
       Router.dispose(() => {
         console.log('Bye Bye from CSS Page');
@@ -56,7 +58,6 @@ export const routeConfig: Routes[] = [
   {
     pathname: '/',
     element: () => {
-      console.log('/', routeLocation());
       const ele = document.createElement('h2');
       ele.innerText = 'HOME PAGE';
       return ele;
@@ -65,13 +66,12 @@ export const routeConfig: Routes[] = [
   {
     pathname: '/about',
     element: () => {
-      console.log('/about', routeLocation());
       const ele = document.createElement('h2');
       ele.innerText = 'ABOUT PAGE';
       const btn = document.createElement('button');
       btn.innerText = 'Take me to the About page with details';
       btn.onclick = () => {
-        Router.go('/about/manisha');
+        Router.go('/about/frontend-dev');
       };
       ele.appendChild(btn);
       Router.dispose(() => {
@@ -83,7 +83,6 @@ export const routeConfig: Routes[] = [
   {
     pathname: '/about/:id',
     element: () => {
-      console.log('/about/:id', routeLocation());
       const ele = document.createElement('h2');
       ele.innerText = `ABOUT PAGE with details about ${
         routeLocation().params.id
@@ -107,9 +106,8 @@ export const routeConfig: Routes[] = [
   {
     pathname: '/learn',
     element: () => {
-      console.log('/learn', routeLocation());
       const fragment = document.createDocumentFragment();
-      const ele = document.createElement('h3');
+      const ele = document.createElement('h2');
       ele.innerText = 'LEARN PAGE';
       fragment.appendChild(ele);
       const btn = document.createElement('button');
@@ -128,7 +126,6 @@ export const routeConfig: Routes[] = [
   {
     pathname: '*',
     element: () => {
-      console.log('*', routeLocation());
       const ele = document.createElement('h3');
       ele.innerText = '404 Page not found';
       return ele;
