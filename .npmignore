@@ -8,3 +8,5 @@ node_modules
 .editorconfig
 .prettierrc
 example
+src/app
+tests

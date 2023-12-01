@@ -1,0 +1,9 @@
+{
+  "entry": ["./src/app/browser-route/main.ts"],
+  "outDir": "./src/app/browser-route/dist",
+  "format": ["iife"],
+  "minifyWhitespace": true,
+  "minify": true,
+  "tsconfig": "./tsconfig.json",
+  "clean": true
+}

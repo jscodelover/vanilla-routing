@@ -19,5 +19,5 @@
     "./playwright.config.ts",
     "./vitest.config.ts"
   ],
-  "exclude": ["./src/test"]
+  "exclude": ["./src/test", "./src/app/browser-route/server.cjs"]
 }

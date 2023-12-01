@@ -27,8 +27,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests for browser route
-        run: npm run test:br:ci
+      - name: Create Build
+        run: npm run build
 
-      - name: Run Playwright tests for hash route
-        run: npm run test:hr:ci
+      - name: Run Playwright tests
+        run: npm run test:ci
