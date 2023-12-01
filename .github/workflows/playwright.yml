@@ -19,7 +19,7 @@ jobs:
           node-version: 18
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --frozen-lockfile
 
       - name: Install Playwright Browsers
         run: npx playwright install
