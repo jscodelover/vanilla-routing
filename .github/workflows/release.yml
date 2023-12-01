@@ -1,11 +1,6 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: ['Main']
-    types: [requested]
-    branches:
-      - 'main'
   release:
     types: [created]
 
