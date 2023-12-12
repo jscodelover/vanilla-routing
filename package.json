@@ -1,7 +1,7 @@
 {
   "name": "vanilla-routing",
   "license": "MIT",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Manisha Basra (jscodelover)",
   "description": "Modern Vanilla Javascript routing library.",
   "keywords": [
