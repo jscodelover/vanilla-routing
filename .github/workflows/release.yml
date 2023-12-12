@@ -24,6 +24,9 @@ jobs:
       - name: Check linting
         run: npm run lint && npm run format
 
+      - name: create the build
+        run: npm run build
+
       - name: Package Publishing
         run: npm publish
         env:
