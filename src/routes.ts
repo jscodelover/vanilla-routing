@@ -169,9 +169,9 @@ class RouterManagement implements RouterManagement {
   #directRoute(routeRenderEle: Element[], routeData: RouteWithLocation) {
     const { nestedLevel, element } = routeData;
     const routeEle = routeRenderEle[nestedLevel];
+    console.log(element);
     if (routeEle) {
       routeEle.innerHTML = '';
-      console.log(element);
       if (element instanceof Promise) {
         element.then(el => {
           if (el instanceof Element || el instanceof DocumentFragment) {
