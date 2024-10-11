@@ -171,6 +171,7 @@ class RouterManagement implements RouterManagement {
     const routeEle = routeRenderEle[nestedLevel];
     if (routeEle) {
       routeEle.innerHTML = '';
+      console.log(element);
       if (element instanceof Promise) {
         element.then(el => {
           if (el instanceof Element || el instanceof DocumentFragment) {
