@@ -8,7 +8,7 @@ export type Params = {
 
 export type Routes = {
   pathname: string;
-  element: () => Element | DocumentFragment;
+  element: () => Element | DocumentFragment | Promise<Element | DocumentFragment>;
   children?: Routes[];
 };
 
@@ -25,7 +25,7 @@ export type RouteLocation = {
 };
 
 export type Route = {
-  element: () => Element | DocumentFragment;
+  element: () => Element | DocumentFragment | Promise<Element | DocumentFragment>;
   params: Params;
   isSubRoute: boolean;
   nestedLevel: number;

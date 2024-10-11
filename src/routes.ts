@@ -171,7 +171,11 @@ class RouterManagement implements RouterManagement {
     const routeEle = routeRenderEle[nestedLevel];
     if (routeEle) {
       routeEle.innerHTML = '';
-      routeEle.appendChild(element());
+      if (routeEle instanceof Promise) {
+        routeEle.then(el => routeEle.appendChild(el));
+      } else {
+        routeEle.appendChild(routeEle);
+      }
     }
   }
 
@@ -213,10 +217,20 @@ class RouterManagement implements RouterManagement {
       const routeInfo = this.#getRoute(`${nextPath}/${path}`);
       nextPath += `/${path}`;
       if (routeInfo.pathname === '*') {
-        routeFragmentEle?.appendChild(this.#routes['*']!.element());
+        const element = this.#routes['*']!.element();
+        if (element instanceof Promise) {
+          element.then(el => routeFragmentEle?.appendChild(el));
+        } else {
+          routeFragmentEle?.appendChild(element);
+        }
         break;
       } else {
-        routeFragmentEle?.appendChild(routeInfo.element());
+        const element = routeInfo.element();
+        if (element instanceof Promise) {
+          element.then(el => routeFragmentEle?.appendChild(el));
+        } else {
+          routeFragmentEle?.appendChild(element);
+        }
       }
     }
 
@@ -361,6 +375,14 @@ class RouterManagement implements RouterManagement {
   // route config
   config(routeData: Routes[], basePath = '') {
     this.#routeConfig(routeData, basePath);
+  }
+
+  private async resolveElement(element: Route['element']): Promise<Element | DocumentFragment> {
+    const result = element();
+    if (result instanceof Promise) {
+      return await result;
+    }
+    return result;
   }
 }
 
