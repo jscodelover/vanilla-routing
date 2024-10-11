@@ -171,10 +171,18 @@ class RouterManagement implements RouterManagement {
     const routeEle = routeRenderEle[nestedLevel];
     if (routeEle) {
       routeEle.innerHTML = '';
-      if (routeEle instanceof Promise) {
-        routeEle.then(el => routeEle.appendChild(el));
+      if (element instanceof Promise) {
+        element.then(el => {
+          if (el instanceof Element || el instanceof DocumentFragment) {
+            routeEle.appendChild(el);
+          } else {
+            console.error('L\'elemento restituito dalla promessa non è un Element o DocumentFragment valido');
+          }
+        });
+      } else if (element instanceof Element || element instanceof DocumentFragment) {
+        routeEle.appendChild(element);
       } else {
-        routeEle.appendChild(routeEle);
+        console.error('L\'elemento fornito non è un Element o DocumentFragment valido');
       }
     }
   }
