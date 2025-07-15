@@ -1,18 +1,18 @@
 import {
-  RouteLocation,
-  Route,
-  Routes,
-  GetParams,
-  PushHistory,
-  RouteWithLocation,
-  RouteType,
-} from './types';
-import {
   BrowserRouteType,
   DefaultNestedLevel,
-  HashRouteType,
   DefaultRoute,
+  HashRouteType,
 } from './constant';
+import {
+  GetParams,
+  PushHistory,
+  Route,
+  RouteLocation,
+  Routes,
+  RouteType,
+  RouteWithLocation,
+} from './types';
 
 class RouterManagement implements RouterManagement {
   #location: RouteLocation = {
@@ -379,7 +379,6 @@ class RouterSetup extends RouterManagement {
   // take the user on the previous route on using the the browser back functionality
   #backListener() {
     window.addEventListener('popstate', (event: PopStateEvent) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const { pathname = '' } = event.state || {};
       if (pathname) {
         this.go(pathname as string, { state: {}, addToHistory: false });
@@ -456,4 +455,4 @@ const routeLocation = () => Router.getLocation();
 
 const router = () => Router.getRoutes();
 
-export { BrowserRoute, HashRoute, Router, routeLocation, router };
+export { BrowserRoute, HashRoute, routeLocation, Router, router };

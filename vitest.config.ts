@@ -2,7 +2,15 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    include: ['./src/routes.test.ts'],
-    environment: 'jsdom',
+    setupFiles: ['./test-setup.js'],
+    include: ['**/*.test.ts'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          environment: 'jsdom',
+        },
+      },
+    ],
   },
 });

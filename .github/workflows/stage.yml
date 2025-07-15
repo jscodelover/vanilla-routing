@@ -28,4 +28,4 @@ jobs:
         run: npm run build
 
       - name: Unit Testing
-        run: npm run test-vi:prod
+        run: npm run test
