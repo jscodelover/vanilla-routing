@@ -2,22 +2,18 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+const PORT = 3000;
 
-// Serve static files from the "example" directory
-app.use('/', express.static(path.join(__dirname, '/')));
-app.use('*/dist', express.static(path.join(__dirname, 'dist')));
+// Serve static files first
+app.use('/dist', express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname))); // root-level static files like index.html, style.css
 
-// Serve the index.html file for all routes
-app.get('/*', function (req, res) {
-  console.log(path.join(__dirname, '/index.html'));
-  res.sendFile(path.join(__dirname, '/index.html'), function (err) {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
+// Catch-all: serve index.html for all unmatched routes (SPA fallback)
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Start the server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
