@@ -20,13 +20,16 @@ jobs:
       - name: Setup Node.js 18.x
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: lts/*
 
       - name: Install Dependencies
-        run: npm install --frozen-lockfile
+        run: npm ci
 
       - name: Check linting
         run: npm run lint && npm run format
 
       - name: Unit Testing
         run: npm run test
+
+      - name: E2e testing
+        run: npm run test:e2e
