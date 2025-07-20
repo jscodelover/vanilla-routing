@@ -1,5 +1,5 @@
-import { Router, routeLocation } from '../../index';
 import type { Routes } from '../../index';
+import { Router, routeLocation } from '../../index';
 
 const learnJsRoute: Routes[] = [
   {

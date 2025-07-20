@@ -6,21 +6,23 @@ on:
       - main
 
 jobs:
-  release:
-    name: Release
+  stage:
+    name: Stage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 18.x
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
+          node-version: lts/*
 
       - name: Install Dependencies
-        run: npm install --frozen-lockfile
+        run: npm ci
 
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       - name: Check linting
         run: npm run lint && npm run format
 
@@ -28,4 +30,7 @@ jobs:
         run: npm run build
 
       - name: Unit Testing
-        run: npm run test-vi:prod
+        run: npm run test
+
+      - name: E2e testing
+        run: npm run test:e2e
