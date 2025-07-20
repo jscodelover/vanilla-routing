@@ -2,7 +2,7 @@
   "name": "vanilla-routing",
   "license": "MIT",
   "version": "1.0.0",
-  "author": "jscodelover (manisha4918@gmail.com)",
+  "author": "jscodelover (manisha.4918@gmail.com)",
   "description": "Modern Vanilla Javascript routing library.",
   "keywords": [
     "route",
@@ -13,6 +13,12 @@
     "browser router",
     "hash router",
     "router"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
