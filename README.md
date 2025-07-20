@@ -4,7 +4,6 @@
 
 [![npm](https://badgen.net/npm/v/vanilla-routing)](https://www.npmjs.com/package/vanilla-routing)
 [![npm](https://badgen.net/npm/dm/vanilla-routing)](https://www.npmjs.com/package/vanilla-routing)
-[![Release](https://github.com/jscodelover/vanilla-routing/actions/workflows/main.yml/badge.svg)](https://github.com/jscodelover/vanilla-routing/actions/workflows/main.yml)
 [![License](https://badgen.net/github/license/jscodelover/vanilla-routing)](https://raw.githubusercontent.com/jscodelover/vanilla-routing/main/LICENSE)
 
 [![NPM](https://nodei.co/npm/vanilla-routing.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/vanilla-routing/)
